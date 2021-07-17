@@ -1,20 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Ionic Leaflet Map
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="layers-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
+      <ion-fab-button [color]="selectedBaseLayer === baseLayer.cycling ? 'danger' : 'primary'"
+                      (click)="switchBaseLayer(baseLayer.cycling)">
+        <ion-icon name="bicycle"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button [color]="selectedBaseLayer === baseLayer.transport ? 'danger' : 'primary'"
+                      (click)="switchBaseLayer(baseLayer.transport)">
+        <ion-icon name="car"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <div class="leaflet" leaflet
+       [leafletOptions]="options"
+       (leafletMapReady)="onMapReady($event)">
   </div>
 </ion-content>
