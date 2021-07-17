@@ -22,6 +22,11 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="locate()">
+    <ion-fab-button>
+      <ion-icon name="locate"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <div class="leaflet" leaflet
        [leafletOptions]="options"
        (leafletMapReady)="onMapReady($event)">
