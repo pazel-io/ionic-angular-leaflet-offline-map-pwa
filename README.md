@@ -4,7 +4,7 @@ This is an Ionic app that demonstrate how to build an offline map with Angular a
 
 There is a blog describing how to build this app step by step.
 
-https://hashnode.com/preview/60f27eb7bb67011cb8368a74
+https://pazel.dev/ionic-angular-leaflet-pwa-offline-maps-part-1
 
 
 ## Run Locally
