@@ -3,6 +3,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { circle, LayerGroup, Map as LMap, TileLayer } from 'leaflet';
 import { BaseLayer } from './BaseLayer.enum';
 import { placeLocationMarker } from './placeLocationMarker';
+import PlaceResult = google.maps.places.PlaceResult;
 
 @Component({
   selector: 'app-home',
@@ -29,9 +30,10 @@ export class HomePage {
   public baseMapUrls = {
     [BaseLayer.cycling]: 'http://c.tile.thunderforest.com/cycle/{z}/{x}/{y}.png',
     [BaseLayer.transport]: 'http://c.tile.thunderforest.com/transport/{z}/{x}/{y}.png',
+    [BaseLayer.osm]: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   };
 
-  public selectedBaseLayer = BaseLayer.cycling;
+  public selectedBaseLayer;
 
   public baseLayer = BaseLayer;
 
@@ -48,11 +50,14 @@ export class HomePage {
     this.map = lMap;
     this.map.addLayer(this.baseMapLayerGroup);
     this.map.addLayer(this.locationLayerGroup);
-    this.switchBaseLayer(this.selectedBaseLayer);
+    this.switchBaseLayer(BaseLayer.osm);
     setTimeout(() => lMap.invalidateSize(true), 0);
   }
 
   public switchBaseLayer(baseLayerName: string) {
+    if (this.selectedBaseLayer === baseLayerName){
+      return;
+    }
     this.baseMapLayerGroup.clearLayers();
     const baseMapTileLayer = new TileLayer(this.baseMapUrls[baseLayerName]);
     this.baseMapLayerGroup.addLayer(baseMapTileLayer);
@@ -71,6 +76,16 @@ export class HomePage {
       (error) => this.onLocateError(error),
       {enableHighAccuracy: true}
     );
+  }
+
+  public showAddressMarker(placeResult: PlaceResult) {
+    const formattedAddress = placeResult.formatted_address;
+    const [lat, lng] = [
+      placeResult.geometry.location.lat(),
+      placeResult.geometry.location.lng(),
+    ];
+    this.map.setView([lat, lng], 18);
+    placeLocationMarker(this.locationLayerGroup, [lat, lng], formattedAddress);
   }
 
   private onLocationSuccess(position: GeolocationPosition) {

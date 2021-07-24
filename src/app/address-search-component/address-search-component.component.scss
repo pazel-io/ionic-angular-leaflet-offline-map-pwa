@@ -1,0 +1,23 @@
+:host {
+  position: absolute;
+  height: 60px;
+  top: 60px;
+  left: 5%;
+  width: 90%;
+  z-index: 1000;
+  display: block;
+  background-color: #121212;
+  border-radius: 10px;
+}
+
+ion-list {
+  margin-top: -7px;
+  padding: 15px 5px 5px 5px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+ion-item {
+  --inner-padding-bottom: 5px;
+  --inner-padding-top: 10px;
+}

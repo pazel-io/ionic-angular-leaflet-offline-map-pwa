@@ -6,12 +6,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
+<ion-content [fullscreen]="true" [scrollY]="false">
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button>
       <ion-icon name="layers-outline"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="bottom">
+    <ion-fab-list side="top">
       <ion-fab-button [color]="selectedBaseLayer === baseLayer.cycling ? 'danger' : 'primary'"
                       (click)="switchBaseLayer(baseLayer.cycling)">
         <ion-icon name="bicycle"></ion-icon>
@@ -20,6 +20,10 @@
                       (click)="switchBaseLayer(baseLayer.transport)">
         <ion-icon name="car"></ion-icon>
       </ion-fab-button>
+      <ion-fab-button [color]="selectedBaseLayer === baseLayer.osm ? 'danger' : 'primary'"
+                      (click)="switchBaseLayer(baseLayer.osm)">
+        <ion-icon name="map-outline"></ion-icon>
+      </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="locate()">
@@ -27,6 +31,7 @@
       <ion-icon name="locate"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <app-address-search-component (placeSelect)="showAddressMarker($event)"></app-address-search-component>
   <div class="leaflet" leaflet
        [leafletOptions]="options"
        (leafletMapReady)="onMapReady($event)">

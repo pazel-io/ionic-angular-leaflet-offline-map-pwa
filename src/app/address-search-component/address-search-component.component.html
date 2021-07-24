@@ -1,0 +1,15 @@
+<ion-searchbar
+  mode="ios"
+  type="search"
+  inputmode="search"
+  placeholder="Enter address"
+  [animated]="true"
+  (ionChange)="lookupAddress($event)"
+  (ionClear)="clearPredictions()"
+  (ionFocus)="showPredictions()"
+></ion-searchbar>
+<div #result style="display: none;"></div>
+<ion-list [hidden]="!predictionsVisible">
+  <ion-item *ngFor="let prediction of predictions"
+            (click)="getPlaceDetails(prediction.place_id)">{{prediction.description}}</ion-item>
+</ion-list>
