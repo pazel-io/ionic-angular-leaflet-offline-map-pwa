@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Ionic App</title>
+  <title>Ionic Leaflet map</title>
 
   <base href="/" />
 
@@ -13,16 +13,19 @@
   <meta name="msapplication-tap-highlight" content="no" />
 
   <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
 
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1976d2">
 </head>
 
 <body>
   <app-root></app-root>
   <script async
-          src="https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places">
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA54mNVEKmr1YcjtgUrje7f5Ii8Dhrtq3Q&libraries=places">
   </script>
 </body>
 
